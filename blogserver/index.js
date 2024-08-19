@@ -11,7 +11,7 @@ connectDB();
 app.use(cors());
 app.use(json());
 app.use("/api/auth", authRoute);
-app.use("/api/blog", blogRoute);
+app.use("/api/posts", blogRoute);
 
 app.listen(port, () => {
   console.log(`listen in ${port}`);

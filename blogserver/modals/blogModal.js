@@ -9,12 +9,11 @@ const blogSchema = mongoose.Schema(
     },
     title: {
       type: String,
-    },
-    category: {
-      type: String,
+      required: true,
     },
     content: {
       type: String,
+      required: true,
     },
   },
   { timestamps: true }
