@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 
 const route = Router();
 
-route.get("/getblogs", auth, blogController.getAllBlogs);
+route.get("/getblogs", blogController.getAllBlogs);
 route.post("/createblog", auth, blogController.createBlog);
 route.delete("/deleteblog/:id", auth, blogController.deleteBlog);
 route.put("/updateblog/:id", auth, blogController.updateBlog);
