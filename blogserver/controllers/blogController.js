@@ -3,11 +3,7 @@ import { Blog } from "../modals/blogModal.js";
 //fetching all blogs
 async function getAllBlogs(req, res) {
   try {
-    const userId = req.user.id;
-    if (!userId) {
-      return res.json({ message: "failed" });
-    }
-    const blogs = await Blog.find({ user: userId });
+    const blogs = await Blog.find();
     res.json({ status: true, message: "All Blogs Fetched", data: blogs });
   } catch (error) {
     res.json({ message: error.message });
