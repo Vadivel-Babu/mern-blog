@@ -10,6 +10,9 @@ const PostListpage = () => {
   if (isError) {
     alert(error);
   }
+  if (isLoading) {
+    console.log("hi");
+  }
 
   return (
     <div className="container">
