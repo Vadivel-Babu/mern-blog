@@ -13,20 +13,16 @@ const Authpage = () => {
         <div className="border  flex gap-2 rounded-xl overflow-hidden max-w-max mx-auto">
           <p
             className={`${
-              isActive === "signup"
-                ? "bg-green-400/45 text-green-800 "
-                : " text-black "
-            }font-bold text-xl p-2 cursor-pointer`}
+              isActive === "signup" ? "bg-green text-darkgreen" : " text-black "
+            } font-bold text-xl p-2 cursor-pointer`}
             onClick={() => setActive("signup")}
           >
             Signup
           </p>
           <p
             className={`${
-              isActive === "login"
-                ? "bg-green-400/45 text-green-800 "
-                : " text-black "
-            }font-bold text-xl p-2 cursor-pointer`}
+              isActive === "login" ? "bg-green text-darkgreen" : " text-black "
+            } font-bold text-xl p-2 cursor-pointer`}
             onClick={() => setActive("login")}
           >
             Login

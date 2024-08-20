@@ -1,11 +1,11 @@
 import React from "react";
 import { Button } from "antd";
-import { Dropdown, Space, Avatar } from "antd";
+import { Dropdown, Avatar } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 
 const items = [
   {
-    label: <Link to="/">1st menu item</Link>,
+    label: <Link to="/create-post">create post</Link>,
     key: "0",
   },
   {
@@ -17,7 +17,7 @@ const items = [
 const Navbar = () => {
   const navigate = useNavigate();
   return (
-    <header>
+    <header className="bg-green">
       <div className="flex justify-between container p-5 items-center ">
         <h1 className="text-3xl font-bold">Blog</h1>
         <Button onClick={() => navigate("/login")} type="primary">
