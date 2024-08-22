@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const AxiosInstance = axios.create({
-  baseURL: "https://mern-blog-9kew.onrender.com/api/",
+  baseURL: "http://localhost:4000/api",
 });
 
 AxiosInstance.interceptors.request.use((config) => {
-  config.headers["Authorization"] = `Beara`;
+  config.headers["Authorization"] = `Bearer`;
   return config;
 });
 

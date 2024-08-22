@@ -1,33 +1,43 @@
 import React, { useState } from "react";
-import { Button, Input, message } from "antd";
-import useLogin from "../services/authApi/loginApi";
+import * as EmailValidator from "email-validator";
+import { Button, Input } from "antd";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   // const { mutate, isSuccess, isPending, isError, error } = useLogin();
-  const [messageApi, contextHolder] = message.useMessage();
+
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ email: "", password: "" });
 
   async function handleLogin(e) {
     e.preventDefault();
-
     try {
+      if (!EmailValidator.validate(data.email)) {
+        toast.error("Enter valid Email");
+        return;
+      }
+      if (!data.password.trim().length) {
+        toast.error("Enter Password");
+        return;
+      }
       setIsLoading(true);
       const response = await axios.post(
-        "https://mern-blog-9kew.onrender.com/api/auth/login",
+        "http://localhost:4000/api/login",
         data
       );
       console.log(response);
+
+      toast.success(JSON.stringify(response));
     } catch (error) {
-      messageApi.error({ content: error.response.data.message });
+      toast.error(error?.response?.data.message);
     } finally {
       setIsLoading(false);
+      setData({ email: "", password: "" });
     }
   }
   return (
     <>
-      {contextHolder}
       <form className="flex flex-col gap-3 w-[300px] md:w-[350px] shadow-lg p-3">
         <h1 className="font-bold text-2xl text-center">Login</h1>
         <Input
@@ -46,7 +56,12 @@ const Login = () => {
             setData({ ...data, [e.target.name]: e.target.value })
           }
         />
-        <Button type="primary" onClick={handleLogin} loading={isLoading}>
+        <Button
+          style={{ backgroundColor: "#969aff" }}
+          type="primary"
+          onClick={handleLogin}
+          loading={isLoading}
+        >
           Login
         </Button>
       </form>

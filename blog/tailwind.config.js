@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        green: "#42f584",
-        darkgreen: "#076921",
+        blue: "#969aff",
+        darkblue: "#0005a1",
       },
     },
   },

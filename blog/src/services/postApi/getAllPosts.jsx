@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import AxiosInstance from "../../utils/axiosInstance";
 
 const getPosts = async () => {
-  const response = await AxiosInstance.get("posts/getblogs");
+  const response = await AxiosInstance.get("posts/");
   return response;
 };
 

@@ -10,9 +10,11 @@ async function signUp(req, res) {
       const hashpassword = await bcrypt.hash(password, 10);
       const newUser = new User({ name, email, password: hashpassword });
       await newUser.save();
+      const token = getToken(newUser._id);
+      res.cookie("token", token);
       return res.status(201).json({
         message: "user created",
-        user: { newUser, token: getToken(newUser._id) },
+        user: { newUser, token },
       });
     }
     return res.json({
@@ -35,10 +37,12 @@ async function login(req, res) {
     if (!isMatch) {
       return res.status(401).json({ message: "Incorrect Password" });
     }
+    const token = getToken(user._id);
+    res.cookie("token", token);
 
     return res.json({
       message: "signin successsfully",
-      user: { user, token: getToken(user._id) },
+      user: { user, token },
     });
   } catch (error) {
     console.log(error.message);
@@ -46,11 +50,19 @@ async function login(req, res) {
   }
 }
 
+async function getProfile(req, res) {
+  const { token } = req.cookies;
+  console.log(req.cookies);
+  // if (cookie) {
+  //   const decode = jwt.verify(cookie, process.env.JWT_KEY);
+  //   const user = await User.findById(decode.id).select("-password");
+  //   return res.json(user);
+  // }
+}
+
 async function logout(req, res) {
-  res.cookie("token", "", {
-    httpOnly: true,
-    expires: new Date(0),
-  });
+  res.cookie("token", "");
+  return res.json({ message: "logged out" });
 }
 
 function getToken(id) {
@@ -58,4 +70,4 @@ function getToken(id) {
     expiresIn: "30d",
   });
 }
-export default { signUp, login, logout };
+export default { signUp, login, logout, getProfile };

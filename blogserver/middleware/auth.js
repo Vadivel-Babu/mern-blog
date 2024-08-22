@@ -3,6 +3,8 @@ import { User } from "../modals/userModal.js";
 
 const auth = async (req, res, next) => {
   let token;
+  console.log(req.cookies.token);
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")

@@ -6,10 +6,13 @@ import Footer from "./components/Footer";
 import PostListpage from "./pages/PostListpage";
 import CreatePostPage from "./pages/CreatePostPage";
 import PostPage from "./pages/PostPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Navbar />
       <main className="min-h-screen">
         <Routes>

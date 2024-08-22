@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "antd";
 import { Dropdown, Avatar } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { Usercontext } from "../UserContext";
 
 const items = [
   {
@@ -16,11 +17,18 @@ const items = [
 ];
 const Navbar = () => {
   const navigate = useNavigate();
+  const user = useContext(Usercontext);
+  console.log(user);
+
   return (
-    <header className="bg-green">
+    <header className="bg-blue">
       <div className="flex justify-between container p-5 items-center ">
-        <h1 className="text-3xl font-bold">Blog</h1>
-        <Button onClick={() => navigate("/login")} type="primary">
+        <h1 className="text-3xl font-bold text-white">Blog</h1>
+        <Button
+          style={{ backgroundColor: "#969aff", fontSize: "1.5rem" }}
+          onClick={() => navigate("/login")}
+          type="primary"
+        >
           Login
         </Button>
         <Dropdown menu={{ items }} trigger={["click"]} arrow>
