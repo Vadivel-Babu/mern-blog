@@ -6,13 +6,9 @@ import { toast } from "react-toastify";
 
 const PostListpage = () => {
   const { data, isLoading, isError, error } = useFetchAllPosts();
-  console.log(data);
 
   if (isError) {
     toast.error(JSON.stringify(error));
-  }
-  if (isLoading) {
-    console.log(isLoading);
   }
 
   return (

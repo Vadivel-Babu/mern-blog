@@ -13,7 +13,7 @@ async function signUp(req, res) {
       const token = getToken(newUser._id);
       res.cookie("token", token);
       return res.status(201).json({
-        message: "user created",
+        message: "sigin succesfully",
         user: { newUser, token },
       });
     }
@@ -41,7 +41,7 @@ async function login(req, res) {
     res.cookie("token", token);
 
     return res.json({
-      message: "signin successsfully",
+      message: "login successsfully",
       user: { user, token },
     });
   } catch (error) {

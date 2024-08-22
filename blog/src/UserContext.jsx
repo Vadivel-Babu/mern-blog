@@ -1,20 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
-import axios from "axios";
 
 export const Usercontext = createContext();
 
 const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  const getUser = () => {
+    const user = localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : null;
+    setUser(user);
+  };
+
   useEffect(() => {
-    async function getUser() {
-      const response = await axios.get("http://localhost:4000/api/profile");
-      const data = await response.json();
-      setUser(data);
-    }
     getUser();
   }, []);
-  return <Usercontext.Provider value={user}>{children}</Usercontext.Provider>;
+  function handleLogout() {
+    setUser(localStorage.removeItem("user"));
+    getUser();
+  }
+
+  function handleUser(user) {
+    setUser(localStorage.setItem("user", JSON.stringify(user)));
+    getUser();
+  }
+  return (
+    <Usercontext.Provider value={{ user, handleLogout, handleUser }}>
+      {children}
+    </Usercontext.Provider>
+  );
 };
 
 export default UserContext;

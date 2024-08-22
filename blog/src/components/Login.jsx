@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import * as EmailValidator from "email-validator";
 import { Button, Input } from "antd";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Usercontext } from "../UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   // const { mutate, isSuccess, isPending, isError, error } = useLogin();
-
+  const { handleUser } = useContext(Usercontext);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -26,9 +29,17 @@ const Login = () => {
         "http://localhost:4000/api/login",
         data
       );
-      console.log(response);
-
-      toast.success(JSON.stringify(response));
+      toast.success(response?.data.message);
+      const { _id, name, email } = response?.data.user.user;
+      const token = response?.data.user.token;
+      const user = {
+        _id,
+        name,
+        email,
+        token,
+      };
+      handleUser(user);
+      navigate("/");
     } catch (error) {
       toast.error(error?.response?.data.message);
     } finally {

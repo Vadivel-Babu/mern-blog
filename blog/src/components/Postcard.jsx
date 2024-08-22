@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Postcard = ({ data }) => {
-  console.log(data);
-
   return (
     <>
       <div className="flex gap-2 border p-3 max-w-[750px] mx-auto">

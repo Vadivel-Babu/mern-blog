@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Button, Input } from "antd";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
 
   async function handleSignin(e) {
     e.preventDefault();
@@ -23,11 +25,22 @@ const Signup = () => {
         "https://mern-blog-9kew.onrender.com/api/auth/sigup",
         data
       );
-      toast.success(JSON.stringify(response));
+      toast.success(response?.data.message);
+      const { _id, name, email } = response?.data.user.user;
+      const token = response?.data.user.token;
+      const user = {
+        _id,
+        name,
+        email,
+        token,
+      };
+      handleUser(user);
+      navigate("/");
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
+      setData({ name: "", email: "", password: "" });
     }
   }
   return (
