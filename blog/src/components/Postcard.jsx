@@ -17,8 +17,8 @@ const Postcard = ({ data }) => {
           <Link to={`/post/${data?._id}`} className="text-blue font-bold mr-2">
             Read More
           </Link>
-          {user._id === data.user && (
-            <Button loading={isPending} onClick={() => mutate(data._id)}>
+          {user?._id === data?.user && (
+            <Button loading={isPending} onClick={() => mutate(data?._id)}>
               delete
             </Button>
           )}

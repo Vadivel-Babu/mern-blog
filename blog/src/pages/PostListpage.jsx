@@ -16,7 +16,9 @@ const PostListpage = () => {
       {isLoading ? (
         <PostListLoading />
       ) : (
-        data?.data?.data?.map((data) => <Postcard key={data._id} data={data} />)
+        data?.data?.data?.map((data) => (
+          <Postcard key={data?._id} data={data} />
+        ))
       )}
     </div>
   );
