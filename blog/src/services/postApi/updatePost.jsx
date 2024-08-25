@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import AxiosInstance from "../../utils/axiosInstance";
+import AxiosInstance from "../../utils/AxiosInstance";
 
 const update = async (data) => {
   const response = await AxiosInstance.put(`/posts/${data._id}`, data);

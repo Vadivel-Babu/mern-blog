@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import AxiosInstance from "../../utils/axiosInstance";
+import AxiosInstance from "../../utils/AxiosInstance";
 
 const remove = async (id) => {
   console.log(id);
