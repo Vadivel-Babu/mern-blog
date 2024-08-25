@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 const PostListpage = () => {
   const { data, isLoading, isError, error } = useFetchAllPosts();
+  console.log(data);
 
   if (isError) {
     toast.error(JSON.stringify(error));
@@ -16,7 +17,7 @@ const PostListpage = () => {
       {isLoading ? (
         <PostListLoading />
       ) : (
-        data?.data.data.map((data) => <Postcard key={data._id} data={data} />)
+        data?.data?.data?.map((data) => <Postcard key={data._id} data={data} />)
       )}
     </div>
   );

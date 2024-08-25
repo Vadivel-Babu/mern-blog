@@ -1,12 +1,11 @@
 import axios from "axios";
 
-const AxiosInstance = axios.create({
-  baseURL: "http://localhost:4000/api",
-});
+const { token } = JSON.parse(localStorage.getItem("user")) || null;
+console.log(token);
 
-AxiosInstance.interceptors.request.use((config) => {
-  config.headers["Authorization"] = `Bearer`;
-  return config;
+const AxiosInstance = axios.create({
+  baseURL: "https://mern-blog-9kew.onrender.com/api/",
+  headers: { Authorization: `Bearer ${token}` },
 });
 
 export default AxiosInstance;

@@ -8,12 +8,8 @@ import CreatePostPage from "./pages/CreatePostPage";
 import PostPage from "./pages/PostPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Usercontext } from "./UserContext";
 
 const App = () => {
-  const { user } = useContext(Usercontext);
-  console.log(user);
-
   return (
     <BrowserRouter>
       <ToastContainer />
@@ -21,7 +17,7 @@ const App = () => {
       <main className="min-h-screen">
         <Routes>
           <Route path="/" element={<PostListpage />} />
-          <Route path="/login" element={!user && <Authpage />} />
+          <Route path="/login" element={<Authpage />} />
           <Route path="/create-post" element={<CreatePostPage />} />
           <Route path="/post/:id" element={<PostPage />} />
         </Routes>

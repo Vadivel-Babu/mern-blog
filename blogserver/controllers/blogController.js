@@ -14,8 +14,8 @@ async function getAllBlogs(req, res) {
 async function createBlog(req, res) {
   try {
     const userId = req.user.id;
-    const { title, category, content } = req.body;
-    const blog = { user: userId, title, category, content };
+    const { title, content } = req.body;
+    const blog = { user: userId, title, content };
     await Blog.create(blog);
 
     return res
@@ -24,6 +24,17 @@ async function createBlog(req, res) {
   } catch (error) {
     res.json({ message: error.message });
   }
+}
+
+async function getSingleblog(req, res) {
+  try {
+    const { id } = req.params;
+
+    const blog = await Blog.findById(id);
+    return res
+      .status(200)
+      .json({ status: true, message: "success", data: blog });
+  } catch (error) {}
 }
 
 //update the blog
@@ -54,4 +65,10 @@ async function deleteBlog(req, res) {
   }
 }
 
-export default { getAllBlogs, createBlog, deleteBlog, updateBlog };
+export default {
+  getAllBlogs,
+  createBlog,
+  deleteBlog,
+  updateBlog,
+  getSingleblog,
+};

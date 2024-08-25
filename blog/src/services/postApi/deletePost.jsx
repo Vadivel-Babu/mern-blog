@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import AxiosInstance from "../../utils/AxiosInstance";
+import AxiosInstance from "../../utils/axiosInstance";
 
-const createPost = async (data) => {
-  const response = await AxiosInstance.post("/posts", data);
-  console.log(response);
+const remove = async (id) => {
+  console.log(id);
 
+  const response = await AxiosInstance.delete(`posts/${id}`);
   return response;
 };
 
-const useCreatePost = () => {
+const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: createPost,
+    mutationFn: remove,
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["posts"] });
@@ -19,4 +19,4 @@ const useCreatePost = () => {
   });
 };
 
-export default useCreatePost;
+export default useDeletePost;
