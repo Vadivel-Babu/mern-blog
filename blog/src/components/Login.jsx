@@ -26,7 +26,7 @@ const Login = () => {
       }
       setIsLoading(true);
       const response = await axios.post(
-        "http://localhost:4000/api/login",
+        "https://mern-blog-9kew.onrender.com/api/login",
         data
       );
       toast.success(response?.data.message);

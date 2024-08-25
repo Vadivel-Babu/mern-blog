@@ -22,7 +22,7 @@ const Signup = () => {
       }
       setIsLoading(true);
       const response = await axios.post(
-        "https://mern-blog-9kew.onrender.com/api/auth/sigup",
+        "https://mern-blog-9kew.onrender.com/api/signup",
         data
       );
       toast.success(response?.data.message);
