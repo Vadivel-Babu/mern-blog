@@ -22,7 +22,7 @@ const SinglePost = () => {
       <h1 className="text-xl md:text3xl my-3">{data?.data?.data?.title}</h1>
       {<img src="" alt="" className="" />}
       <p className="text-lg">{data?.data?.data?.content}</p>
-      {user._id === data?.data?.data?.user && (
+      {user?._id === data?.data?.data?.user && (
         <div className="mt-3 space-x-2">
           <Button type="primary" onClick={() => navigate(`/edit/${id}`)}>
             Edit
