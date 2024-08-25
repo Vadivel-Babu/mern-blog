@@ -42,6 +42,8 @@ async function updateBlog(req, res) {
   try {
     const { id } = req.params;
     const updatedData = req.body;
+    console.log(id, updatedData);
+
     const updateblog = await Blog.findByIdAndUpdate(id, updatedData, {
       new: true,
     });

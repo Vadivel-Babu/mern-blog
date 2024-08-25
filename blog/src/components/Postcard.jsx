@@ -9,12 +9,12 @@ const Postcard = ({ data }) => {
   const { mutate, isPending } = useDeletePost();
   return (
     <>
-      <div className="flex gap-2 border p-3 max-w-[750px] mx-auto">
-        <img src="" alt="" className="w-[200px] h-[200px] bg-slate-400" />
+      <div className="flex gap-2 border p-5 shadow-xl max-w-max mx-auto">
+        {/* <img src="" alt="" className="w-[200px] h-[200px] bg-slate-400" /> */}
         <div>
           <h1 className="text-xl md:text-3xl font-bold">{data?.title}</h1>
           <p className="my-3">{data?.content}</p>
-          <Link to={`/post/${data?._id}`} className="text-blue font-bold">
+          <Link to={`/post/${data?._id}`} className="text-blue font-bold mr-2">
             Read More
           </Link>
           {user._id === data.user && (

@@ -4,11 +4,12 @@ import useCreatePost from "../services/postApi/createPost";
 import { toast } from "react-toastify";
 
 const CreatePost = () => {
-  const { mutate, isError, isPending, error } = useCreatePost();
+  const { mutate, isError, isPending, error, isSuccess } = useCreatePost();
   const [data, setData] = useState({ title: "", content: "" });
   if (isError) {
     toast.error(error);
   }
+
   function handleCreatePost(e) {
     e.preventDefault();
     if (data.title.trim().length === 0) {
@@ -20,18 +21,25 @@ const CreatePost = () => {
       return;
     }
     mutate(data);
+    if (!isPending) {
+      setData({ title: " ", content: " " });
+      toast.success("Post Created");
+    }
   }
+
   return (
     <form className="flex flex-col gap-3 mx-auto w-[300px] md:w-[350px] shadow-lg p-3">
       <h1 className="font-bold text-2xl text-center">Create Post</h1>
       <Input
         placeholder="Title"
         name="title"
+        value={data.title}
         onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
       />
       <Input
         placeholder="Content"
         name="content"
+        value={data.content}
         onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
       />
       <Button onClick={handleCreatePost} type="primary" loading={isPending}>
