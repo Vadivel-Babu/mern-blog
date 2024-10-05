@@ -11,8 +11,11 @@ const Signup = () => {
 
   async function handleSignin(e) {
     e.preventDefault();
+
     try {
       if (!EmailValidator.validate(data.email)) {
+        console.log(data.email);
+
         toast.error("Enter valid Email");
         return;
       }
@@ -37,10 +40,10 @@ const Signup = () => {
       handleUser(user);
       navigate("/");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(JSON.stringify(error.response?.data.message));
     } finally {
       setIsLoading(false);
-      setData({ name: "", email: "", password: "" });
+      // setData({ name: "", email: "", password: "" });
     }
   }
   return (
