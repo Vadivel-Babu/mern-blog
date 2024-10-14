@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Input } from "antd";
 import useCreatePost from "../services/postApi/createPost";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const { mutate, isError, isPending, error, isSuccess } = useCreatePost();
   const [data, setData] = useState({ title: "", content: "" });
-  if (isError) {
-    toast.error(error);
-  }
+  const navigate = useNavigate();
 
   function handleCreatePost(e) {
     e.preventDefault();
@@ -21,11 +20,18 @@ const CreatePost = () => {
       return;
     }
     mutate(data);
-    if (!isPending) {
+  }
+
+  useEffect(() => {
+    if (!isPending && isSuccess) {
       setData({ title: " ", content: " " });
       toast.success("Post Created");
+      navigate("/");
     }
-  }
+    if (isError) {
+      toast.error(error.response.data.message);
+    }
+  }, [isPending, isError]);
 
   return (
     <form className="flex flex-col gap-3 mx-auto w-[300px] md:w-[350px] shadow-lg p-3">

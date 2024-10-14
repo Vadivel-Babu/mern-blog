@@ -13,7 +13,13 @@ import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   return (
     <BrowserRouter>
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        theme="dark"
+        hideProgressBar
+        pauseOnFocusLoss={false}
+      />
       <Navbar />
       <main className="min-h-screen">
         <Routes>
