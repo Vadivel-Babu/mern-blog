@@ -6,7 +6,7 @@ import axios from "axios";
 
 const sigin = async (data) => {
   const response = await axios.post(
-    "http://localhost:4000/api/auth/signup",
+    "https://mern-blog-9kew.onrender.com/api/auth/signup",
     data
   );
 

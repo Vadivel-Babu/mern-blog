@@ -6,7 +6,7 @@ import axios from "axios";
 
 const AxiosInstance = axios.create({
   //withCredentials: true,
-  baseURL: "http://localhost:4000/api/",
+  baseURL: "https://mern-blog-9kew.onrender.com/api/",
   // headers: { Authorization: `Bearer ${user?.token}` },
 });
 

@@ -8,7 +8,7 @@ import { Usercontext } from "../../UserContext";
 
 const login = async (data) => {
   const response = await axios.post(
-    "http://localhost:4000/api/auth/login",
+    "https://mern-blog-9kew.onrender.com/api/auth/login",
     data
   );
   return response;
