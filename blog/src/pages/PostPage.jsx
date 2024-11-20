@@ -29,9 +29,15 @@ const PostPage = () => {
             />
           )}
         </h1>
-        {comments?.map((comment, i) => (
-          <Comment id={id} comment={comment} user={me?.data} key={i} />
-        ))}
+        {comments?.length
+          ? comments?.map((comment, i) => (
+              <Comment id={id} comment={comment} user={me?.data} key={i} />
+            ))
+          : !isLoading && (
+              <h1 className="text-xl font-semibold text-center mt-5">
+                No comments Found
+              </h1>
+            )}
       </div>
     </div>
   );

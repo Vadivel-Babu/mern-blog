@@ -22,7 +22,6 @@ const SinglePost = ({ data, me, isLoading, id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate, isPending } = useDeletePost();
   const { mutate: handleLike, isPending: likeLoading } = useLikePost();
-  console.log(data, me);
 
   const navigate = useNavigate();
 
@@ -46,14 +45,16 @@ const SinglePost = ({ data, me, isLoading, id }) => {
           </h1>
           <div className="p-2 flex justify-center items-center gap-2">
             <Avatar
-              src={user?.profileImg}
+              src={data?.data?.data?.user?.profileImg}
               size={40}
               alt="user"
               icon={<FaUser />}
             />
             <p className="capitalize font-medium text-slate-600">
               author:{" "}
-              <span className="font-semibold text-black">{user?.name}</span>{" "}
+              <span className="font-semibold text-black">
+                {data?.data?.data?.user?.name}
+              </span>{" "}
             </p>
           </div>
           {data?.data?.data?.img ? (
@@ -70,7 +71,7 @@ const SinglePost = ({ data, me, isLoading, id }) => {
           <p className="text-lg tracking-wider text-center">
             {data?.data?.data?.content}
           </p>
-          {user?._id === data?.data?.data?.user ? (
+          {user?._id === data?.data?.data?.user?._id ? (
             <div className="mt-3 mx-auto w-max space-x-2">
               <Button type="primary" onClick={() => navigate(`/edit/${id}`)}>
                 <FaEdit />
