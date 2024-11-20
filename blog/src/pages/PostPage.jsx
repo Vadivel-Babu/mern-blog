@@ -13,7 +13,7 @@ const PostPage = () => {
   const { data, isLoading } = getPost(id);
   const { data: me, isLoading: meLoading, onError } = useFetchMe();
 
-  const comments = data?.data?.data.comments;
+  const comments = data?.data?.data?.comments;
 
   return (
     <div className="container">
