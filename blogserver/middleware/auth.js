@@ -3,7 +3,6 @@ import { User } from "../modals/userModal.js";
 
 const auth = async (req, res, next) => {
   let token = req.headers.authorization?.split(" ")[1];
-  console.log(req.headers.authorization);
 
   if (token) {
     try {

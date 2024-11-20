@@ -21,18 +21,20 @@ async function signUp(req, res) {
       const newUser = new User({ name, email, password: hashpassword });
       await newUser.save();
       const token = getToken(newUser._id);
-      return res
-        .cookie("token", token, {
-          maxAge: 15 * 24 * 60 * 1000,
-          httpOnly: true,
-          sameSite: "strict",
-          secure: process.env.NODE_ENV !== "development",
-        })
-        .status(201)
-        .json({
-          message: "sigin succesfully",
-          token,
-        });
+      return (
+        res
+          // .cookie("token", token, {
+          //   maxAge: 15 * 24 * 60 * 1000,
+          //   httpOnly: true,
+          //   sameSite: "strict",
+          //   secure: process.env.NODE_ENV !== "development",
+          // })
+          .status(201)
+          .json({
+            message: "sigin succesfully",
+            token,
+          })
+      );
     }
     return res.json({
       message: "user name or email already exsist",
@@ -64,12 +66,12 @@ async function login(req, res) {
     }
     const token = getToken(user._id);
     res
-      .cookie("token", token, {
-        maxAge: 15 * 24 * 60 * 1000,
-        httpOnly: true,
-        sameSite: "strict",
-        secure: process.env.NODE_ENV !== "development",
-      })
+      // .cookie("token", token, {
+      //   maxAge: 15 * 24 * 60 * 1000,
+      //   httpOnly: true,
+      //   sameSite: "strict",
+      //   secure: process.env.NODE_ENV !== "development",
+      // })
       .status(201)
       .json({
         message: "login successsfully",
