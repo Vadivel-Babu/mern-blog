@@ -18,9 +18,7 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 connectDB();
-app.use(
-  cors({ origin: "https://mern-blog-9kew.onrender.com", credentials: true })
-);
+app.use(cors({ origin: "*", credentials: true }));
 app.use(json());
 app.use(cookieParser());
 app.get("/", (req, res) => {
