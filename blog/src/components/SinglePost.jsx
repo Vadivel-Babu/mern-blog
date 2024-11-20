@@ -18,7 +18,7 @@ import useLikePost from "../services/commentsApi/likePost";
 
 const SinglePost = ({ data, me, isLoading, id }) => {
   const { user } = useContext(Usercontext);
-  const isUserLiked = data?.data?.data.likes.includes(me?.data._id);
+  const isUserLiked = data?.data?.data?.likes.includes(me?.data._id);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate, isPending } = useDeletePost();
   const { mutate: handleLike, isPending: likeLoading } = useLikePost();
@@ -94,7 +94,7 @@ const SinglePost = ({ data, me, isLoading, id }) => {
                 ></Button>
                 <Button
                   loading={likeLoading}
-                  onClick={() => handleLike(data?.data?.data._id)}
+                  onClick={() => handleLike(data?.data?.data?._id)}
                   icon={isUserLiked ? <FcLike /> : <FcLikePlaceholder />}
                 ></Button>
               </div>
@@ -103,7 +103,7 @@ const SinglePost = ({ data, me, isLoading, id }) => {
         </div>
       )}
       <CommentModal
-        postId={data?.data?.data._id}
+        postId={data?.data?.data?._id}
         open={isModalOpen}
         handleCancel={handleCancel}
       />

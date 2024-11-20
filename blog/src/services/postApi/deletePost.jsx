@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import AxiosInstance from "../../utils/AxiosInstance";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const remove = async (id) => {
   console.log(id);
@@ -11,6 +12,7 @@ const remove = async (id) => {
 
 const useDeletePost = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   return useMutation({
     mutationFn: remove,
     onError: (error) => {
@@ -20,6 +22,7 @@ const useDeletePost = () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["posts"] });
       toast.warning("Post deleted");
+      navigate("/");
     },
   });
 };
