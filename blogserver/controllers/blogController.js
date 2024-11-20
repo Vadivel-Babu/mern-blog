@@ -72,17 +72,19 @@ async function getSingleblog(req, res) {
   try {
     const { id } = req.params;
 
-    const blog = await Blog.findById(id).populate({
-      path: "comments.user",
-      select: [
-        "-password",
-        "-email",
-        "-bio",
-        "-followers",
-        "-link",
-        "-following",
-      ],
-    });
+    const blog = await Blog.findById(id)
+      .populate({
+        path: "comments.user",
+        select: [
+          "-password",
+          "-email",
+          "-bio",
+          "-followers",
+          "-link",
+          "-following",
+        ],
+      })
+      .populate({ path: "user", select: ["-password"] });
     return res
       .status(200)
       .json({ status: true, message: "success", data: blog });

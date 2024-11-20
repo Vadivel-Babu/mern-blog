@@ -22,6 +22,7 @@ const SinglePost = ({ data, me, isLoading, id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate, isPending } = useDeletePost();
   const { mutate: handleLike, isPending: likeLoading } = useLikePost();
+  console.log(data, me);
 
   const navigate = useNavigate();
 
