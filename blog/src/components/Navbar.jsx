@@ -67,7 +67,12 @@ const Navbar = () => {
   return (
     <header className="bg-blue">
       <div className="flex justify-between container p-5 items-center ">
-        <h1 className="text-3xl font-bold text-white">Blog</h1>
+        <h1
+          onClick={() => navigate("/")}
+          className="cursor-pointer text-3xl drop-shadow-xl font-bold text-white"
+        >
+          Blog
+        </h1>
         <div className="flex items-center gap-3">
           <Button
             onClick={handleNavigate}

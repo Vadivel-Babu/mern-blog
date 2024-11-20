@@ -21,11 +21,13 @@ const PostPage = () => {
       <SinglePost data={data} isLoading={isLoading} me={me} id={id} />
       <div className="mt-5 mx-auto  max-w-[650px]">
         <h1 className="font-bold text-lg md:text-xl">
-          Comments:{" "}
-          <Badge
-            count={comments !== undefined ? comments.length : 0}
-            showZero
-          />
+          {!isLoading && "Comments: "}
+          {!isLoading && (
+            <Badge
+              count={comments !== undefined ? comments.length : 0}
+              showZero
+            />
+          )}
         </h1>
         {comments?.map((comment, i) => (
           <Comment id={id} comment={comment} user={me?.data} key={i} />
