@@ -2,14 +2,16 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import AxiosInstance from "../../utils/AxiosInstance";
 import { toast } from "react-toastify";
 
-const remove = async (id) => {
-  console.log(id);
+const remove = async (data) => {
+  console.log(data);
 
-  const response = await AxiosInstance.delete(`posts/${id}`);
+  const response = await AxiosInstance.delete(
+    `posts/comment/${data.postId}/${data._id}`
+  );
   return response;
 };
 
-const useDeletePost = () => {
+const useDeleteComment = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: remove,
@@ -24,4 +26,4 @@ const useDeletePost = () => {
   });
 };
 
-export default useDeletePost;
+export default useDeleteComment;

@@ -5,6 +5,7 @@ export const Usercontext = createContext();
 
 const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   const getUser = () => {
     const user = localStorage.getItem("user")
@@ -17,8 +18,15 @@ const UserContext = ({ children }) => {
     getUser();
   }, []);
   function handleLogout() {
+    console.log("logout");
+
     setUser(localStorage.removeItem("user"));
+    localStorage.removeItem("token");
     getUser();
+  }
+
+  function handleSetToken(token) {
+    localStorage.setItem("token", token);
   }
 
   function handleUser(user) {
@@ -26,7 +34,9 @@ const UserContext = ({ children }) => {
     getUser();
   }
   return (
-    <Usercontext.Provider value={{ user, handleLogout, handleUser }}>
+    <Usercontext.Provider
+      value={{ user, handleLogout, handleUser, handleSetToken }}
+    >
       {children}
     </Usercontext.Provider>
   );

@@ -3,25 +3,22 @@ import AxiosInstance from "../../utils/AxiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const createPost = async (data) => {
-  console.log(data);
-
-  const response = await AxiosInstance.post("posts", data);
-  console.log(response);
+const logout = async () => {
+  const response = await AxiosInstance.post("auth/logout");
 
   return response;
 };
 
-const useCreatePost = () => {
+const useLogout = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: createPost,
+    mutationFn: logout,
     onSuccess: () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-      toast.success("Post created");
-      navigate("/");
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      toast.success("Logged out");
+      navigate("/login");
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || error?.message);
@@ -29,4 +26,4 @@ const useCreatePost = () => {
   });
 };
 
-export default useCreatePost;
+export default useLogout;

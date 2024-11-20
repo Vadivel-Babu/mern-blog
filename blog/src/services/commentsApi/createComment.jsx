@@ -1,27 +1,25 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import AxiosInstance from "../../utils/AxiosInstance";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
-const createPost = async (data) => {
-  console.log(data);
-
-  const response = await AxiosInstance.post("posts", data);
-  console.log(response);
+const createComment = async (data) => {
+  const response = await AxiosInstance.post(
+    `posts/comment/${data.postId}`,
+    data
+  );
 
   return response;
 };
 
-const useCreatePost = () => {
-  const navigate = useNavigate();
+const useCreateComment = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: createPost,
-    onSuccess: () => {
+    mutationFn: createComment,
+    onSuccess: (res) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["posts"] });
-      toast.success("Post created");
-      navigate("/");
+
+      toast.success(res.data.message);
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || error?.message);
@@ -29,4 +27,4 @@ const useCreatePost = () => {
   });
 };
 
-export default useCreatePost;
+export default useCreateComment;

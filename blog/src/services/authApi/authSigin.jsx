@@ -2,25 +2,26 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import AxiosInstance from "../../utils/AxiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const createPost = async (data) => {
-  console.log(data);
-
-  const response = await AxiosInstance.post("posts", data);
-  console.log(response);
+const sigin = async (data) => {
+  const response = await axios.post(
+    "http://localhost:4000/api/auth/signup",
+    data
+  );
 
   return response;
 };
 
-const useCreatePost = () => {
+const useSigin = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: createPost,
+    mutationFn: sigin,
     onSuccess: () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-      toast.success("Post created");
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      toast.success("Register succesfully");
       navigate("/");
     },
     onError: (error) => {
@@ -29,4 +30,4 @@ const useCreatePost = () => {
   });
 };
 
-export default useCreatePost;
+export default useSigin;

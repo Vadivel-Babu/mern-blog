@@ -3,25 +3,20 @@ import AxiosInstance from "../../utils/AxiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const createPost = async (data) => {
-  console.log(data);
-
-  const response = await AxiosInstance.post("posts", data);
-  console.log(response);
-
+const update = async (data) => {
+  const response = await AxiosInstance.put(`/user/profile`, data);
   return response;
 };
 
-const useCreatePost = () => {
+const useUpdateProfile = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: createPost,
+    mutationFn: update,
     onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-      toast.success("Post created");
-      navigate("/");
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      toast.success("Profile Updated");
+      navigate(-1);
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || error?.message);
@@ -29,4 +24,4 @@ const useCreatePost = () => {
   });
 };
 
-export default useCreatePost;
+export default useUpdateProfile;

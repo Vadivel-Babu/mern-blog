@@ -12,9 +12,7 @@ const BackButton = () => {
       shape="round"
       icon={<IoArrowBack />}
       onClick={() => navigate(-1)}
-    >
-      Back
-    </Button>
+    />
   );
 };
 

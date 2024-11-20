@@ -15,7 +15,45 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       require: true,
+      minLength: 4,
     },
+    followers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
+    following: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
+    profileImg: {
+      type: String,
+      default: "",
+    },
+    coverImg: {
+      type: String,
+      default: "",
+    },
+    bio: {
+      type: String,
+      default: "",
+    },
+    link: {
+      type: String,
+      default: "",
+    },
+    likedPosts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Blog",
+        default: [],
+      },
+    ],
   },
   { timestamps: true }
 );

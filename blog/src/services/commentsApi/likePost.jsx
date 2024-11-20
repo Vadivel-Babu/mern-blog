@@ -1,27 +1,22 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import AxiosInstance from "../../utils/AxiosInstance";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
-const createPost = async (data) => {
-  console.log(data);
-
-  const response = await AxiosInstance.post("posts", data);
-  console.log(response);
+const likePost = async (id) => {
+  const response = await AxiosInstance.post(`posts/like/${id}`);
 
   return response;
 };
 
-const useCreatePost = () => {
-  const navigate = useNavigate();
+const useLikePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: createPost,
-    onSuccess: () => {
+    mutationFn: likePost,
+    onSuccess: (res) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["posts"] });
-      toast.success("Post created");
-      navigate("/");
+
+      toast.success(res.data.message);
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || error?.message);
@@ -29,4 +24,4 @@ const useCreatePost = () => {
   });
 };
 
-export default useCreatePost;
+export default useLikePost;
