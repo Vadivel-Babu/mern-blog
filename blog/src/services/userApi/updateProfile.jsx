@@ -14,7 +14,11 @@ const useUpdateProfile = () => {
   return useMutation({
     mutationFn: update,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["profile"] }),
+        queryClient.invalidateQueries({ queryKey: ["user"] }),
+      ]);
+
       toast.success("Profile Updated");
       navigate(-1);
     },

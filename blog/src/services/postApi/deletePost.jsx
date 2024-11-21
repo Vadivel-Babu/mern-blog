@@ -4,8 +4,6 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const remove = async (id) => {
-  console.log(id);
-
   const response = await AxiosInstance.delete(`posts/${id}`);
   return response;
 };

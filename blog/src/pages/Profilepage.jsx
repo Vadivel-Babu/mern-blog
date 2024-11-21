@@ -11,6 +11,7 @@ const Profilepage = () => {
 
   const { data, isLoading } = useFetchProfile(id);
   const navigate = useNavigate();
+  console.log(data);
 
   return (
     <div className="container">
@@ -61,6 +62,7 @@ const Profilepage = () => {
               </p>
               {data?.data?.link && (
                 <a
+                  target="_blank"
                   href={data?.data?.link}
                   className="underline text-white font-semibold bg-darkblue px-2 py-1 rounded-lg"
                 >

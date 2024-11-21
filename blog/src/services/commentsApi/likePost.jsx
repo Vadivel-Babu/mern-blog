@@ -14,7 +14,10 @@ const useLikePost = () => {
     mutationFn: likePost,
     onSuccess: (res) => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["posts"] }),
+        queryClient.invalidateQueries({ queryKey: ["profile"] }),
+      ]);
 
       toast.success(res.data.message);
     },

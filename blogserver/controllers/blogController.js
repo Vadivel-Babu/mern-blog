@@ -150,11 +150,11 @@ async function handleLike(req, res) {
         { _id: postId },
         { $pull: { likes: userId } }
       );
-      await User.updateOne({ _id: userId }, { $pull: { likePost: postId } });
+      await User.updateOne({ _id: userId }, { $pull: { likedPosts: postId } });
       res.status(200).json({ message: "Post unliked successfully" });
     } else {
       blog.likes.push(userId);
-      await User.updateOne({ _id: userId }, { $push: { likePost: postId } });
+      await User.updateOne({ _id: userId }, { $push: { likedPosts: postId } });
       await blog.save();
       const notification = new Notification({
         from: userId,
@@ -170,7 +170,7 @@ async function handleLike(req, res) {
   }
 }
 
-//handlelike
+//handle Create Comment
 async function createComment(req, res) {
   try {
     const { text } = req.body;
